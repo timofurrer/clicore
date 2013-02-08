@@ -42,15 +42,15 @@ class CLI:
                 self.stop()
                 return
 
-        item, args = self._get_item_by_line(line_input)
-        if item is not None:
-            f = item.get_function()
-            if f is not None:
-                f(item, args, line_input)
+            item, args = self._get_item_by_line(line_input)
+            if item is not None:
+                f = item.get_function()
+                if f is not None:
+                    f(item, args, line_input)
+                else:
+                    print("command cannot be invoked")
             else:
-                print("command cannot be invoked")
-        else:
-            print("command cannot be found")
+                print("command cannot be found")
 
     def stop(self):
         # TODO: implement hook for before stop
