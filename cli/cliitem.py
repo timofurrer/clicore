@@ -59,6 +59,9 @@ class CLIItem:
                 matches.append(self)
         return matches
 
+    def register_subitem(self, subitem):
+        self._subitems.append(subitem)
+
 
 class CLISysPathItem(CLIItem):
     def __init__(self):
