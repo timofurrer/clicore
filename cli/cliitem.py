@@ -4,14 +4,14 @@ import os
 
 
 class CLIItem:
-    def __init__(self, name, function=None, value=None, enabled=True, subitems=[], tab_delimiter=" ", category=None):
+    def __init__(self, name, function=None, value=None, enabled=True, subitems=[], tab_delimiter=" ", categories=[]):
         self._name = name
         self._function = function
         self._value = value
         self._enabled = enabled
         self._subitems = subitems
         self._tab_delimiter = tab_delimiter
-        self._category = category
+        self._categories = categories
 
     def get_name(self):
         return self._name
@@ -27,6 +27,9 @@ class CLIItem:
 
     def is_enabled(self):
         return self._enabled
+
+    def in_category(self, category):
+        return category in self._categories
 
     def get_item_by_line(self, line):
         if line.startswith(self.get_completion_name()):
