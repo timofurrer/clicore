@@ -35,7 +35,7 @@ class CLIItem:
                 return self, args
             else:
                 for i in self._subitems:
-                    subitem = subargs = i.get_item_by_line(args)
+                    subitem, subargs = i.get_item_by_line(args)
                     if subitem is not None:
                         if subitem.get_function() is not None:
                             return subitem, subargs
