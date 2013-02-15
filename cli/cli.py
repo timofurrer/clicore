@@ -3,7 +3,7 @@
 import os
 import readline
 
-from cliitem import CLIItem, CLISysPathItem
+from cliitem import CLIItem
 
 
 class CLI:
