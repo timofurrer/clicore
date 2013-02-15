@@ -95,3 +95,7 @@ class CLI:
         for i in self._items:
             if i.get_name() == name:
                 self._items.remove(i)
+
+    def enable_items_by_category(self, category):
+        for i in self._items:
+            i.set_enabled(i.in_category(category))

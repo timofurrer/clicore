@@ -28,6 +28,9 @@ class CLIItem:
     def is_enabled(self):
         return self._enabled
 
+    def set_enabled(self, enabled):
+        self._enabled = enabled
+
     def in_category(self, category):
         return category in self._categories
 
