@@ -34,6 +34,8 @@ class CLI:
         while self._started:
             try:
                 line_input = raw_input(self._prompt)
+                if not line_input:
+                    continue
             except EOFError:  # occures when Ctrl+D is pressed
                 # TODO: ask for really existing
                 self.stop()
