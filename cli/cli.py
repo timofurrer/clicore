@@ -3,10 +3,10 @@
 import os
 import readline
 
-from cliitem import CLIItem
+from cliitem import CliItem
 
 
-class CLI:
+class Cli:
     def __init__(self, history_file=None, welcome_text=None, use_location=True):
         # configure readline
         readline.set_completer(self._complete)
@@ -19,7 +19,7 @@ class CLI:
         self._matches = []
         self._items = []
 
-        self._prompt = "CLI> "
+        self._prompt = "Cli> "
 
     def start(self):
         if self._history_file is not None:
@@ -70,7 +70,7 @@ class CLI:
                 for r in i.complete(original_line):
                     self._matches.append(r)
         m = self._matches[state]
-        if isinstance(m, CLIItem):
+        if isinstance(m, CliItem):
             return m.get_completion_name()
         return m
 

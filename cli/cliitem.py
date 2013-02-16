@@ -3,7 +3,7 @@
 import os
 
 
-class CLIItem:
+class CliItem:
     def __init__(self, name, function=None, value=None, enabled=True, subitems=[], tab_delimiter=" ", categories=[]):
         self._name = name
         self._function = function
@@ -69,9 +69,9 @@ class CLIItem:
         self._subitems.append(subitem)
 
 
-class CLISysPathItem(CLIItem):
+class CliSysPathItem(CliItem):
     def __init__(self):
-        CLIItem.__init__(self, "path_item")
+        CliItem.__init__(self, "path_item")
 
     def _listdir(self, root):
         matches = []
