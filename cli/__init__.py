@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-from cli import Cli
-from cliitem import CliItem, CliSysPathItem
+from cli.core import Cli
+from cli.cliitem import CliItem, CliSysPathItem

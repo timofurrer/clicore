@@ -3,7 +3,7 @@
 import os
 import readline
 
-from cliitem import CliItem
+from cliitem import CliItem, CliSysPathItem
 
 
 class Cli:
