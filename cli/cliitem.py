@@ -3,7 +3,7 @@
 import os
 
 
-class CliItem:
+class CliItem(object):
     def __init__(self, name, function=None, value=None, enabled=True, subitems=[], tab_delimiter=" ", categories=[]):
         self._name = name
         self._function = function

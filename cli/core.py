@@ -7,7 +7,7 @@ from cli.observable import Observable
 from cli.cliitem import CliItem, CliSysPathItem
 
 
-class Cli:
+class Cli(object):
     obs = Observable()
 
     def __init__(self, history_file=None, welcome_text=None, use_location=True):
