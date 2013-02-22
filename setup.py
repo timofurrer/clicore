@@ -9,5 +9,6 @@ setup(
     author="Timo Furrer",
     author_email="tuxtimo@gmail.com",
     url="https://github.com/timofurrer/cli",
-    packages=["cli"]
+    package_dir={"cli.observable": "cli/pyobservable/observable"},
+    packages=["cli", "cli.observable"]
 )

@@ -3,10 +3,13 @@
 import os
 import readline
 
-from cliitem import CliItem, CliSysPathItem
+from cli.observable import Observable
+from cli.cliitem import CliItem, CliSysPathItem
 
 
 class Cli:
+    obs = Observable()
+
     def __init__(self, history_file=None, welcome_text=None, use_location=True):
         # configure readline
         readline.set_completer(self._complete)
@@ -21,6 +24,16 @@ class Cli:
 
         self._prompt = "Cli> "
 
+        # register observable events
+        self.obs.register_event("initialized")  # triggered after Cli.__init__
+        self.obs.register_event("before_start")  # triggered before cli loop is started
+        self.obs.register_event("raw_input_entered")  # triggered after an input is entered
+        self.obs.register_event("before_stop")  # triggered before cli loop is stopped
+        self.obs.register_event("after_stop")  # triggered after cli loop is stopped
+
+        # trigger 'on.initialized' event
+        self.obs.trigger("initialized", self)
+
     def start(self):
         if self._history_file is not None:
             try:
@@ -28,12 +41,15 @@ class Cli:
             except IOError:  # occures if history file does not exist yet
                 pass
 
-        # TODO: implement hook for "start_before"
+        # trigger 'on.before_start' event
+        self.obs.trigger("before_start", self)
 
         self._started = True
         while self._started:
             try:
                 line_input = raw_input(self._prompt)
+                # trigger 'on.raw_input_entered' event
+                self.obs.trigger("raw_input_entered", self)
                 if not line_input:
                     continue
             except EOFError:  # occures when Ctrl+D is pressed
@@ -55,11 +71,13 @@ class Cli:
                 print("command cannot be found")
 
     def stop(self):
-        # TODO: implement hook for before stop
+        # trigger 'on.before_stop' event
+        self.obs.trigger("before_stop", self)
         if self._history_file is not None:
             readline.write_history_file(self._history_file)
         self._started = False
-        # TODO: implement hook for after stop
+        # trigger 'on.after_stop' event
+        self.obs.trigger("after_stop", self)
 
     def _complete(self, line, state):
         if state == 0:
