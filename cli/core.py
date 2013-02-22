@@ -44,6 +44,9 @@ class Cli(object):
         # trigger 'on.before_start' event
         self.obs.trigger("before_start", self)
 
+        if self._welcome_text:
+            print(self._welcome_text)
+
         self._started = True
         while self._started:
             try:
@@ -103,6 +106,9 @@ class Cli(object):
 
     def set_prompt(self, prompt):
         self._prompt = prompt
+
+    def set_welcome_text(self, welcome_text):
+        self._welcome_text = welcome_text
 
     def register_item(self, item):
         self._items.append(item)
