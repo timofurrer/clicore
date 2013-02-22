@@ -53,7 +53,9 @@ class Cli(object):
                 if not line_input:
                     continue
             except EOFError:  # occures when Ctrl+D is pressed
-                # TODO: ask for really existing
+                answer = raw_input("\nDo you really want to exit ([y]/n)? ")
+                if answer not in ["y", ""]:
+                    continue
                 self.stop()
                 return
             except KeyboardInterrupt:  # occures when Ctrl+C is pressed
