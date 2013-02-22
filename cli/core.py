@@ -3,6 +3,7 @@
 import os
 import readline
 
+from cli.colorful import Colorful
 from cli.observable import Observable
 from cli.cliitem import CliItem, CliSysPathItem
 
@@ -71,9 +72,9 @@ class Cli(object):
                 if f is not None:
                     f(item, args, line_input)
                 else:
-                    print("command cannot be invoked")
+                    Colorful.out.bold_red("command cannot be invoked")
             else:
-                print("command cannot be found")
+                Colorful.out.bold_red("command cannot be found")
 
     def stop(self):
         # trigger 'on.before_stop' event
