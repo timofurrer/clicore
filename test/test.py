@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from cli.core import Cli, CliItem, CliSysPathItem
+from clicore.core import Cli, CliItem, CliSysPathItem
 
 
 class MyCli(Cli):

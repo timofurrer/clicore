@@ -9,3 +9,7 @@
 
 # distutils.setup files
 build
+clicore.egg-info/
+
+# virtual environment
+clicore-env

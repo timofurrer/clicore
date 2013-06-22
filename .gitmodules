@@ -1,6 +1,3 @@
-[submodule "cli/pyobservable"]
-	path = cli/pyobservable
-	url = https://github.com/timofurrer/pyobservable.git
 [submodule "cli/colorful"]
 	path = cli/colorful
 	url = https://github.com/timofurrer/colorful.git
