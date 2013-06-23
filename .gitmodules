@@ -1,3 +1,0 @@
-[submodule "cli/colorful"]
-	path = cli/colorful
-	url = https://github.com/timofurrer/colorful.git

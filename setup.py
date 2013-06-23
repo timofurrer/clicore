@@ -9,7 +9,6 @@ setup(
     author="Timo Furrer",
     author_email="tuxtimo@gmail.com",
     url="https://github.com/timofurrer/cli",
-    install_requires=["observable==0.00.03"],
-    package_dir={"clicore.colorful": "clicore/colorful/colorful"},
-    packages=["clicore", "clicore.colorful"]
+    install_requires=["observable==0.00.03", "colorful==0.00.02"],
+    packages=["clicore"]
 )

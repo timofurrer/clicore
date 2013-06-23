@@ -9,6 +9,7 @@
 
 # distutils.setup files
 build
+dist
 clicore.egg-info/
 
 # virtual environment

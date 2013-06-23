@@ -3,13 +3,9 @@
 import os
 import readline
 from observable import Observable
+from colorful import Colorful
 
-<<<<<<< Updated upstream
-from cli.colorful import Colorful
-from cli.cliitem import CliItem, CliSysPathItem
-=======
 from clicore.cliitem import CliItem, CliSysPathItem
->>>>>>> Stashed changes
 
 
 class Cli(object):
