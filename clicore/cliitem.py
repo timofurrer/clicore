@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 
 
 class CliItem(object):
@@ -67,6 +68,21 @@ class CliItem(object):
 
     def register_subitem(self, subitem):
         self._subitems.append(subitem)
+
+    def get_help(self):
+        arguments = ""
+        description = self._function.__doc__ or "No description available"
+        if self._function and self._function.__doc__ is not None:
+            help_str = self._function.__doc__
+            arguments_match = re.search("(?:arguments|args):(.*)", help_str)
+            description_match = re.search("(?:description|desc):(.*)", help_str)
+
+            if arguments_match:
+                arguments = arguments_match.groups()[0].strip()
+            if description_match:
+                description = description_match.groups()[0].strip()
+
+        return {"arguments": arguments, "description": description}
 
 
 class CliSysPathItem(CliItem):

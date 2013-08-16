@@ -111,6 +111,9 @@ class Cli(object):
     def set_welcome_text(self, welcome_text):
         self._welcome_text = welcome_text
 
+    def get_items(self):
+        return self._items
+
     def register_item(self, item):
         self._items.append(item)
 
