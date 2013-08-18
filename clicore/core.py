@@ -21,6 +21,7 @@ class Cli(object):
 
         self._started = False
         self._matches = []
+        self._categories = {}
         self._items = []
 
         self._prompt = "Cli> "
@@ -70,7 +71,7 @@ class Cli(object):
             if item is not None:
                 f = item.get_function()
                 if f is not None:
-                    f(item, args, line_input)
+                    f(item, args.split(), line_input)
                 else:
                     Colorful.out.bold_red("command cannot be invoked")
             else:
@@ -114,8 +115,17 @@ class Cli(object):
     def get_items(self):
         return self._items
 
-    def register_item(self, item):
+    def register_category(self, category, enabled=True):
+        self._categories[category] = enabled
+
+    def remove_category(self, category):
+        del self._categories[category]
+
+    def register_item(self, item, **kw):
         self._items.append(item)
+        for c in item.get_categories():
+            if c not in self._categories:
+                self.register_category(c)
 
     def clear_items(self):
         for i in self._items:
@@ -126,6 +136,24 @@ class Cli(object):
             if i.get_name() == name:
                 self._items.remove(i)
 
-    def enable_items_by_category(self, category):
+    def get_item_by_name(self, name, only_enabled=False):
+        items = [i for i in self._items if i.is_enabled() and i.get_name() == name]
+        return items[0] if items else None
+
+    def enable_category(self, category, only_one=False):
+        for k in self._categories.iterkeys():
+            self._categories[k] = False
+        self._categories[category] = True
+        self._apply_enabled_categories()
+
+    def disable_category(self, category):
+        for k in self._categories.iterkeys():
+            self._categories[k] = True
+        self._categories[category] = False
+        self._apply_enabled_categories()
+
+    def _apply_enabled_categories(self):
+        enabled_categories = [k for k, v in self._categories.iteritems() if v]
         for i in self._items:
-            i.set_enabled(i.in_category(category))
+            categories = i.get_categories()
+            i.set_enabled(any(c in enabled_categories for c in categories) or not categories)

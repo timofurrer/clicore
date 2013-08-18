@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
     name="clicore",
     description="cli core library for python",
-    version="0.00.01",
+    version="0.00.03",
     author="Timo Furrer",
     author_email="tuxtimo@gmail.com",
     url="https://github.com/timofurrer/cli",

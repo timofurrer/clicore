@@ -12,7 +12,19 @@ class CliHelper(object):
             raise TypeError("first argument must have a 'get_items()' method")
 
         def help_item(item, args, line_input):
-            items = cli.get_items()
+            """
+                arguments: [item]
+                description: show this help screen
+            """
+            if not args:
+                items = [i for i in cli.get_items() if i.is_enabled()]
+                items.sort(key=lambda i: i.get_name())
+            else:
+                item = cli.get_item_by_name(args, only_enabled=True)
+                if not item:
+                    print("item '%s' does not exist or is not enabled" % args)
+                    return
+                items = [item]
 
             max_len_name = max([len(i.get_name()) for i in items])
             max_len_args = max([len(i.get_help()["arguments"]) for i in items])
@@ -20,7 +32,7 @@ class CliHelper(object):
 
             indentation = "    "
             spaces = "      "
-            for i in cli.get_items():
+            for i in items:
                 name = i.get_name()
                 help = i.get_help()
                 sys.stdout.write(indentation + name + " " * (max_len_name - len(name)) + spaces)

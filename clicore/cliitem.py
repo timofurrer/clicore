@@ -26,6 +26,9 @@ class CliItem(object):
     def get_value(self):
         return self._value
 
+    def get_categories(self):
+        return self._categories
+
     def is_enabled(self):
         return self._enabled
 
